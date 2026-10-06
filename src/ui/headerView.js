@@ -103,22 +103,21 @@ export class HeaderView {
             </button>
           </div>
 
-          <button type="button" class="btn btn-ghost btn-icon-only" id="btn-shortcuts" title="Atajos de teclado y accesibilidad (?)" aria-label="Ver atajos de teclado">
-            ${renderIconSvg('Keyboard', { size: 17 })}
-          </button>
-
-          <button type="button" class="btn btn-ghost btn-icon-only" id="btn-export" title="Exportar tableros a JSON" aria-label="Exportar tableros">
-            ${renderIconSvg('Download', { size: 16 })}
-          </button>
-
-          <label class="btn btn-ghost btn-icon-only" title="Importar tableros desde JSON" aria-label="Importar tableros" style="cursor: pointer; margin: 0;">
-            ${renderIconSvg('Upload', { size: 16 })}
-            <input type="file" id="file-import" accept=".json" style="display: none;" />
-          </label>
-
-          <button type="button" class="btn btn-ghost btn-icon-only" id="btn-toggle-theme" title="Cambiar tema claro/oscuro" aria-label="Cambiar tema claro u oscuro">
-            ${renderIconSvg(theme === 'dark' ? 'Sun' : 'Moon', { size: 17 })}
-          </button>
+          <div class="toolbar-group" role="group" aria-label="Herramientas y ajustes">
+            <button type="button" class="btn btn-ghost btn-icon-only" id="btn-shortcuts" title="Atajos de teclado y accesibilidad (?)" aria-label="Ver atajos de teclado">
+              ${renderIconSvg('Keyboard', { size: 16 })}
+            </button>
+            <button type="button" class="btn btn-ghost btn-icon-only" id="btn-export" title="Exportar copia de seguridad (JSON)" aria-label="Exportar copia de seguridad">
+              ${renderIconSvg('Download', { size: 16 })}
+            </button>
+            <label class="btn btn-ghost btn-icon-only" title="Importar copia de seguridad (JSON)" aria-label="Importar copia de seguridad" style="cursor: pointer; margin: 0;">
+              ${renderIconSvg('Upload', { size: 16 })}
+              <input type="file" id="file-import" accept=".json" style="display: none;" />
+            </label>
+            <button type="button" class="btn btn-ghost btn-icon-only" id="btn-toggle-theme" title="${theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}" aria-label="Cambiar tema claro u oscuro">
+              ${renderIconSvg(theme === 'dark' ? 'Sun' : 'Moon', { size: 16 })}
+            </button>
+          </div>
         </div>
       </div>
 

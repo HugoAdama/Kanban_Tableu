@@ -12,7 +12,7 @@
   box-shadow: var(--shadow-sm);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), opacity var(--transition-fast);
   user-select: none;
-  border-left-width: 3.5px;
+  border-left-width: 4px;
 }
 
 /* Priority Left Accent Border */
@@ -35,7 +35,7 @@
 .kanban-card:hover {
   border-color: var(--border-strong);
   box-shadow: var(--shadow-card-hover);
-  transform: translateY(-2.5px);
+  transform: translateY(-4px) scale(1.006);
 }
 
 /* Maintain priority border on hover */
@@ -132,11 +132,11 @@
 }
 
 .card-title {
-  font-size: 0.9rem;
+  font-size: 0.96rem;
   font-weight: 700;
   color: var(--text-primary);
-  line-height: 1.35;
-  letter-spacing: -0.01em;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
   word-break: break-word;
 }
 
@@ -144,7 +144,7 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  opacity: 0.6;
+  opacity: 0.65;
   transition: opacity var(--transition-fast);
 }
 
@@ -154,8 +154,8 @@
 }
 
 .card-action-btn {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   padding: 0;
   border-radius: var(--radius-sm);
   color: var(--text-muted);
@@ -168,7 +168,7 @@
   background-color: var(--bg-surface-active);
   color: var(--text-primary);
   border-color: var(--border-strong);
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .card-action-btn.delete-btn:hover {
@@ -179,9 +179,9 @@
 
 /* Card Description */
 .card-desc {
-  font-size: 0.8125rem;
+  font-size: 0.86rem;
   color: var(--text-secondary);
-  line-height: 1.45;
+  line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -197,9 +197,9 @@
 }
 
 .tag-badge {
-  font-size: 0.6875rem;
+  font-size: 0.74rem;
   font-weight: 700;
-  padding: 0.2rem 0.55rem;
+  padding: 0.22rem 0.6rem;
   border-radius: var(--radius-full);
   display: inline-flex;
   align-items: center;
@@ -266,10 +266,10 @@
 .priority-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.3rem;
   font-weight: 700;
-  font-size: 0.72rem;
-  padding: 0.15rem 0.5rem;
+  font-size: 0.78rem;
+  padding: 0.2rem 0.55rem;
   border-radius: var(--radius-sm);
 }
 
@@ -287,8 +287,8 @@
 
 .priority-badge.alta {
   color: #fb923c;
-  background-color: rgba(251, 146, 60, 0.12);
-  border: 1px solid rgba(251, 146, 60, 0.28);
+  background-color: rgba(251, 146, 60, 0.15);
+  border: 1px solid rgba(251, 146, 60, 0.35);
 }
 
 .priority-badge.urgente {
@@ -301,12 +301,14 @@
 .due-date-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  color: var(--text-muted);
-  font-size: 0.74rem;
-  font-weight: 500;
-  padding: 0.15rem 0.45rem;
+  gap: 0.35rem;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
   border-radius: var(--radius-sm);
+  background-color: var(--bg-surface-active);
+  border: 1px solid var(--border-subtle);
 }
 
 .due-date-badge.is-overdue {

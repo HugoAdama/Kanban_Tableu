@@ -23,7 +23,7 @@
 }
 
 .board-heading {
-  font-size: 1.625rem;
+  font-size: 1.75rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--text-primary);
@@ -33,9 +33,11 @@
 }
 
 .board-desc {
-  font-size: 0.875rem;
+  font-size: 0.92rem;
+  font-weight: 500;
   color: var(--text-secondary);
   max-width: 700px;
+  line-height: 1.5;
 }
 
 .board-stats {
@@ -134,8 +136,8 @@
 }
 
 .column-title {
-  font-size: 0.9375rem;
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 800;
   letter-spacing: -0.015em;
   color: var(--text-primary);
   white-space: nowrap;
@@ -144,13 +146,13 @@
 }
 
 .column-count-badge {
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  padding: 0.15rem 0.55rem;
+  padding: 0.2rem 0.65rem;
   border-radius: var(--radius-full);
   background-color: var(--bg-surface);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
   line-height: 1.2;
 }
 

@@ -65,6 +65,10 @@ export class BoardView {
             ${renderIconSvg('CheckCircle2', { size: 14 })}
             ${statsText}
           </span>
+          <button type="button" class="btn btn-primary btn-add-col-top" id="btn-add-column-top" title="Añadir una nueva columna a este tablero">
+            ${renderIconSvg('Plus', { size: 15 })}
+            <span>Añadir Columna</span>
+          </button>
         </div>
       </section>
 
@@ -210,6 +214,12 @@ export class BoardView {
           dialogs.openColumnModal();
         }
       });
+    }
+
+    // Top Add Column button click
+    const addColTop = this.container.querySelector('#btn-add-column-top');
+    if (addColTop) {
+      addColTop.addEventListener('click', () => dialogs.openColumnModal());
     }
 
     // Column edit buttons
