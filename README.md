@@ -14,10 +14,10 @@
 * **Standout Keyboard Accessibility (a11y)**: Complete card reordering and cross-column movement using only the keyboard (`Space` / `Enter` to grab/drop, `Arrow Keys` to reorder or transfer, `Esc` to cancel), accompanied by real-time `aria-live` screen reader announcements.
 * **Native HTML5 Drag & Drop**: Fluid mouse drag-and-drop with real-time midpoint insertion indicators (`.drop-indicator-top` and `.drop-indicator-bottom`).
 * **Command Pattern Undo & Redo**: Full action stack (`Ctrl + Z` / `Ctrl + Y`), toolbar history controls, and interactive Toast notifications with direct "Undo" actions.
-* **Multi-Board Support**: Seamless switching between different project boards, custom column creation, color coding, renaming, and safe deletion.
-* **Advanced Multi-Criteria Filtering**: Instant real-time search across titles and descriptions combined with priority, tag, and due date filters (overdue and upcoming alerts).
-* **Vector Iconography**: Professional and consistent SVG iconography powered by Lucide.
-* **Accessible Dark & Light Themes**: HSL-based design system with persistent theme preference and WCAG AA contrast compliance.
+* **Multi-Board Support & Adaptive Column Actions**: Seamless switching between boards, column creation from both the horizontal track and header metrics pill (`+ Añadir Columna`), color coding, and renaming.
+* **Advanced Multi-Criteria Filtering & Quick Chips**: Instant search across titles and descriptions combined with priority, tag, and due date filters alongside 1-click quick-filter chips (`Todos`, `Urgente`, `Alta`, `Próximas`, `Vencidas`, `Bugs`).
+* **Precision Vector Iconography & Pixel Alignment**: SVG iconography powered by Lucide with standardized 38px utility groups, semantic buttons, and flex alignment.
+* **Accessible Dark & Light Themes**: HSL-based design system with persistent theme preference and WCAG AA contrast compliance (7:1+ contrast ratios).
 * **Local Persistence & Portability**: Automatic `localStorage` synchronization with JSON export and import for demos and backups.
 
 ---
@@ -91,8 +91,8 @@ KANBAN_TABLEU/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/kanban-tableu.git
-   cd kanban-tableu
+   git clone https://github.com/HugoAdama/Kanban_Tableu.git
+   cd Kanban_Tableu
    ```
 
 2. Install dependencies:
@@ -110,18 +110,26 @@ KANBAN_TABLEU/
    npm run build
    ```
 
-5. Preview production build:
+5. Deploy to GitHub Pages:
    ```bash
-   npm run preview
+   npm run deploy
    ```
+
+---
+
+## Deployment & CI/CD
+
+The application is deployed live to GitHub Pages using two automated avenues:
+* **GitHub Actions Workflow** (`.github/workflows/deploy.yml`): Automatically triggers upon pushes to the `main` branch, installing dependencies, compiling production bundles with Vite (`base: '/Kanban_Tableu/'`), and deploying directly to GitHub Pages.
+* **gh-pages CLI integration**: Fast local deployment command (`npm run deploy`) that builds and pushes the production `dist/` directory to the `gh-pages` branch.
 
 ---
 
 ## Documentation
 
 Detailed architectural notes and learnings are available in the `docs/` folder:
-* **[docs/tecnologias.md](docs/tecnologias.md)**: Deep dive into the chosen technologies, native browser APIs, performance benchmarks, and rationale.
-* **[docs/aprendizajes.md](docs/aprendizajes.md)**: Lessons learned in managing complex client-side state, Command patterns for history, and building accessible keyboard-driven interfaces.
+* **[docs/tecnologias.md](docs/tecnologias.md)**: Deep dive into the chosen technologies, native browser APIs, responsive design tokens, and rationale.
+* **[docs/aprendizajes.md](docs/aprendizajes.md)**: Lessons learned in managing complex client-side state, Command patterns for history, cross-browser toolbar alignments, and building accessible keyboard-driven interfaces.
 
 ---
 

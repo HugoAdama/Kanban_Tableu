@@ -76,10 +76,28 @@ El filtrado en tableros Kanban presenta el reto de mantener la coherencia de las
 
 ---
 
-## 6. Conclusión y Valor para el Portafolio Profesional
+## 6. Consistencia Visual, Alineación Pixel-Perfect y Descubrimiento de Acciones
+
+Durante el pulido de la interfaz y la experiencia de usuario surgieron desafíos específicos de maquetación avanzada:
+
+### El dilema del botón de subida de archivos vs. `<label>`:
+* **El problema:** Al integrar un botón para importar respaldos JSON en la barra de herramientas, se utilizó inicialmente una etiqueta `<label>` conteniendo un `<input type="file" style="display:none">`. Los navegadores aplican por defecto a los elementos `<label>` una alineación de línea base (`baseline`) de texto, a diferencia de los elementos `<button>` estilizados con `display: inline-flex; align-items: center;`. Esta discrepancia provocaba que el icono SVG de subida flotara varios píxeles más arriba que los botones vecinos de exportación, atajos y tema.
+* **La solución arquitectónica:** Se sustituyó el `<label>` por un `<button type="button">` semántico idéntico a sus pares y se desacopló el `<input type="file">` invisible. Un controlador de eventos dispara `.click()` sobre el input programáticamente. Además, se forzó en CSS una altura estricta unificada (38px), centrado flex y `margin: auto; display: block;` en todos los SVGs de la barra.
+
+### Acciones críticas y diseño responsive de tableros anchos:
+* **El problema:** En resoluciones medias o ventanas no maximizadas, la columna especial `+ Añadir Columna` ubicada al extremo derecho del contenedor horizontal quedaba fuera del campo visual inmediato, obligando al usuario a desplazarse lateralmente para percatarse de su existencia.
+* **La solución:** Se diseñó un patrón de acceso dual: un botón de acción rápida `+ Añadir Columna` destacado en la cabecera del tablero junto al contador de columnas y tarjetas, sincronizado visualmente con el botón del final del carril.
+
+### Despliegue estático con Vite en GitHub Pages:
+* **El desafío:** El enrutamiento de activos relativos en GitHub Pages requiere una sub-ruta fija (`/Kanban_Tableu/`). Se configuró la opción `base` en `vite.config.js` y se automatizó la compilación mediante GitHub Actions para garantizar compilaciones reproducibles en cada commit.
+
+---
+
+## 7. Conclusión y Valor para el Portafolio Profesional
 
 Este proyecto demuestra que no es necesario recurrir a grandes marcos de trabajo para construir aplicaciones web complejas, rápidas y accesibles. Demuestra:
 * Dominio exhaustivo de estándares web modernos (HTML5 Drag & Drop, Dialog API, CSS Custom Properties).
-* Compromiso real con la accesibilidad universal (WCAG 2.1 AA).
+* Compromiso real con la accesibilidad universal (WCAG 2.1 AA) tanto por teclado como para lectores de pantalla.
 * Arquitectura de software modular, limpia y escalable.
-* Atención minuciosa a la estética, micro-interacciones y experiencia de usuario profesional.
+* Atención minuciosa a la estética, micro-interacciones, consistencia pixel-perfect y experiencia de usuario profesional.
+
