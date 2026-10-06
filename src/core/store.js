@@ -2,6 +2,12 @@
 import { storage } from './storage.js';
 import { HistoryManager } from './history.js';
 import { EVENTS } from './types.js';
+function safeUUID() {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return 'id-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 9);
+}
 
 class Store extends EventTarget {
   constructor() {
@@ -76,14 +82,14 @@ class Store extends EventTarget {
   createBoard(name, description = '') {
     this._recordAction(`Crear tablero "${name}"`);
     const newBoard = {
-      id: 'board-' + crypto.randomUUID(),
+      id: 'board-' + safeUUID(),
       name: name.trim(),
       description: description.trim(),
       createdAt: new Date().toISOString(),
       columns: [
-        { id: 'col-' + crypto.randomUUID(), name: 'Por hacer', color: '#6366f1', cards: [] },
-        { id: 'col-' + crypto.randomUUID(), name: 'En curso', color: '#f59e0b', cards: [] },
-        { id: 'col-' + crypto.randomUUID(), name: 'Hecho', color: '#10b981', cards: [] }
+        { id: 'col-' + safeUUID(), name: 'Por hacer', color: '#6366f1', cards: [] },
+        { id: 'col-' + safeUUID(), name: 'En curso', color: '#f59e0b', cards: [] },
+        { id: 'col-' + safeUUID(), name: 'Hecho', color: '#10b981', cards: [] }
       ]
     };
 
@@ -129,7 +135,7 @@ class Store extends EventTarget {
 
     this._recordAction(`Añadir columna "${name}"`);
     const newColumn = {
-      id: 'col-' + crypto.randomUUID(),
+      id: 'col-' + safeUUID(),
       name: name.trim(),
       color: color || '#6366f1',
       cards: []
@@ -175,7 +181,7 @@ class Store extends EventTarget {
 
     this._recordAction(`Crear tarjeta "${cardData.title}"`);
     const newCard = {
-      id: 'card-' + crypto.randomUUID(),
+      id: 'card-' + safeUUID(),
       title: cardData.title.trim(),
       description: (cardData.description || '').trim(),
       priority: cardData.priority || 'media',
