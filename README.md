@@ -26,20 +26,20 @@
 
 | Action | Shortcut |
 | :--- | :--- |
-| **Grab / Drop Card (Move Mode)** | <kbd>Space</kbd> or <kbd>Enter</kbd> |
-| **Reorder within Column** | <kbd>↑</kbd> / <kbd>↓</kbd> |
-| **Move to Previous / Next Column** | <kbd>←</kbd> / <kbd>→</kbd> |
-| **Cancel Movement & Revert** | <kbd>Esc</kbd> |
-| **Undo Last Action** | <kbd>Ctrl</kbd> + <kbd>Z</kbd> |
-| **Redo Action** | <kbd>Ctrl</kbd> + <kbd>Y</kbd> |
-| **Keyboard Shortcuts Help** | <kbd>?</kbd> |
-| **Navigate Elements** | <kbd>Tab</kbd> / <kbd>Shift</kbd> + <kbd>Tab</kbd> |
+| **Grab / Drop Card (Move Mode)** | `Space` or `Enter` |
+| **Reorder within Column** | `↑` / `↓` |
+| **Move to Previous / Next Column** | `←` / `→` |
+| **Cancel Movement & Revert** | `Esc` |
+| **Undo Last Action** | `Ctrl` + `Z` |
+| **Redo Action** | `Ctrl` + `Y` |
+| **Keyboard Shortcuts Help** | `?` |
+| **Navigate Elements** | `Tab` / `Shift` + `Tab` |
 
 ---
 
 ## Project Architecture
 
-```
+```text
 KANBAN_TABLEU/
 ├── docs/
 │   ├── tecnologias.md          # Technical stack, browser APIs & justification

@@ -15,30 +15,37 @@ Esta guía está dirigida a desarrolladores y evaluadores que deseen ejecutar, i
 ## 2. Instalación y Ejecución Local
 
 1. **Clonar el repositorio:**
+
    ```bash
    git clone https://github.com/HugoAdama/Kanban_Tableu.git
    cd Kanban_Tableu
    ```
 
 2. **Instalar dependencias de desarrollo:**
+
    ```bash
    npm install
    ```
 
 3. **Iniciar el servidor de desarrollo:**
+
    ```bash
    npm run dev
    ```
+
    * Accede a la URL local (generalmente `http://localhost:5173/`).
    * La aplicación cuenta con Hot Module Replacement (HMR) instantáneo.
 
 4. **Compilar para producción:**
+
    ```bash
    npm run build
    ```
+
    * Genera la carpeta `dist/` con los archivos HTML, CSS minificado y JS empaquetado.
 
 5. **Previsualizar la compilación de producción localmente:**
+
    ```bash
    npm run preview
    ```
@@ -59,19 +66,25 @@ Esta guía está dirigida a desarrolladores y evaluadores que deseen ejecutar, i
 ## 4. Guía para Extender el Proyecto
 
 ### 4.1. Cómo añadir una nueva etiqueta temática (Tag)
+
 1. En [src/core/types.js](file:///e:/KANBAN_TABLEU/src/core/types.js), agrega la nueva clave al objeto `DEFAULT_TAGS`:
+
    ```javascript
    export const DEFAULT_TAGS = {
      // ...etiquetas existentes
      qa: { id: 'qa', label: 'QA / Testing', color: '#14b8a6', icon: 'CheckSquare' }
    };
    ```
+
 2. En [src/styles/variables.css](file:///e:/KANBAN_TABLEU/src/styles/variables.css), añade los tokens de color correspondientes:
+
    ```css
    --tag-qa: #14b8a6;
    --tag-qa-bg: rgba(20, 184, 166, 0.15);
    ```
+
 3. En [src/styles/card.css](file:///e:/KANBAN_TABLEU/src/styles/card.css), define la regla del selector:
+
    ```css
    .tag-badge.qa {
      background-color: var(--tag-qa-bg);
@@ -81,7 +94,9 @@ Esta guía está dirigida a desarrolladores y evaluadores que deseen ejecutar, i
    ```
 
 ### 4.2. Cómo añadir una nueva acción reversible al historial
+
 Todas las mutaciones reversibles en `src/core/store.js` deben registrar una instantánea antes de modificar el estado:
+
 ```javascript
 this.history.push({
   description: 'Descripción amigable para el usuario',
@@ -96,7 +111,7 @@ this.history.push({
 Antes de realizar una entrega o actualización, comprueba los siguientes puntos:
 
 - [ ] **Drag & Drop:** Las tarjetas pueden arrastrarse entre columnas y los indicadores superior/inferior se muestran con precisión.
-- [ ] **Navegación por Teclado:** Se puede mover una tarjeta con <kbd>Espacio</kbd> + <kbd>Flechas</kbd> y cancelar con <kbd>Esc</kbd>.
+- [ ] **Navegación por Teclado:** Se puede mover una tarjeta con `Espacio` + `Flechas` y cancelar con `Esc`.
 - [ ] **Historial Undo/Redo:** `Ctrl + Z` y `Ctrl + Y` revierten y re-aplican cambios de movimiento, creación y edición.
 - [ ] **Filtros Combinados:** El buscador de texto y los filtros de prioridad/etiqueta/vencimiento funcionan simultáneamente.
 - [ ] **Persistencia:** Al recargar la página (`F5`), el tablero mantiene exactamente las tarjetas y el tema seleccionado.

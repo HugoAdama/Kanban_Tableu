@@ -8,7 +8,7 @@ Este documento describe la arquitectura modular, los patrones de diseño y el fl
 
 El proyecto implementa una **arquitectura por capas desacoplada** con estricta separación de responsabilidades:
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                 Capa de Presentación (UI)                   │
 │   headerView.js  │  boardView.js  │  dialogs.js  │  icons.js│
@@ -34,6 +34,7 @@ El proyecto implementa una **arquitectura por capas desacoplada** con estricta s
 ## 2. Descripción de Capas
 
 ### 2.1. Capa de Dominio (`src/core/`)
+
 Representa el corazón del sistema, independiente de la representación visual:
 
 * **`store.js`**: Almacén reactivo singleton que extiende la clase nativa del navegador `EventTarget`.
@@ -53,13 +54,14 @@ Representa el corazón del sistema, independiente de la representación visual:
 ---
 
 ### 2.2. Capa de Servicios (`src/services/`)
+
 Encapsula la lógica de interacción compleja y comportamientos transversales:
 
 * **`dndService.js`**: Controlador del motor nativo HTML5 Drag & Drop.
   * Gestiona los eventos `dragstart`, `dragover`, `dragleave` y `drop`.
   * Calcula la posición vertical relativa del cursor (`clientY` respecto a la mitad de la tarjeta) para proyectar líneas de inserción en tiempo real (`.drop-indicator-top` y `.drop-indicator-bottom`).
 * **`keyboardA11yService.js`**: Controlador de accesibilidad motriz por teclado.
-  * Modela la captura de tarjetas en modo "arrastre virtual" mediante teclas <kbd>Space</kbd> y <kbd>Enter</kbd>.
+  * Modela la captura de tarjetas en modo "arrastre virtual" mediante teclas `Space` y `Enter`.
   * Maneja el reordenamiento con flechas direccionales y comunica cada cambio a través del sintetizador de accesibilidad.
 * **`filterService.js`**: Motor de búsqueda y filtrado multicriterio.
   * Ejecuta comparaciones insensibles a mayúsculas sobre título y descripción.
@@ -71,6 +73,7 @@ Encapsula la lógica de interacción compleja y comportamientos transversales:
 ---
 
 ### 2.3. Capa de Presentación (`src/ui/`)
+
 Responsable de renderizar la interfaz de usuario a partir del estado:
 
 * **`headerView.js`**: Renderiza la barra superior del espacio de trabajo.
@@ -93,16 +96,22 @@ Responsable de renderizar la interfaz de usuario a partir del estado:
 ## 3. Patrones de Diseño Implementados
 
 ### 3.1. Patrón Observer / Reactive Event Bus
+
 En lugar de pasar callbacks entre múltiples niveles de componentes o introducir librerías externas:
+
 1. Las mutaciones ocurren en `store.js`.
 2. El almacén emite eventos nativos:
+
    ```javascript
    this.dispatchEvent(new CustomEvent('kanban:state-changed', { detail: { action, payload } }));
    ```
+
 3. Las vistas (`headerView`, `boardView`) escuchan este evento y refrescan sus partes correspondientes del DOM sin acoplarse directamente entre sí.
 
 ### 3.2. Patrón Command / Snapshot Stack (Historial)
+
 Cada mutación registrable guarda un duplicado profundo del estado anterior:
+
 ```javascript
 // Registro de acción reversible
 this.history.push({
@@ -110,20 +119,24 @@ this.history.push({
   state: structuredClone(previousBoards)
 });
 ```
+
 Al ejecutar `store.undo()`, el almacén extrae el último estado del stack y restaura la memoria y el almacenamiento sin recargar la página.
 
 ### 3.3. Patrón Factory para Iconos SVG
+
 En lugar de inyectar fuentes tipográficas de iconos o etiquetas `<img src="...">` que aumentan las solicitudes HTTP, `src/ui/icons.js` actúa como una fábrica de elementos SVG limpios y configurables:
+
 ```javascript
 export function renderIconSvg(name, { size = 16, className = '', strokeWidth = 2 } = {})
 ```
+
 Esto permite controlar el color mediante `currentColor`, el tamaño exacto y el centrado geométrico.
 
 ---
 
 ## 4. Flujo de Datos Unidireccional
 
-```
+```text
 ┌────────────────┐       1. Clic / Teclado       ┌──────────────────┐
 │ Usuario / A11y │ ────────────────────────────> │ Componente UI    │
 └────────────────┘                               └────────┬─────────┘

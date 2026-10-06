@@ -8,7 +8,7 @@ El desarrollo de este Tablero Kanban representa un ejercicio de ingeniería de s
 
 Uno de los errores más comunes en proyectos de portafolio es acoplar la manipulación del DOM, el almacenamiento y la lógica de negocio en un único archivo. En este proyecto se aplicó una arquitectura en capas claramente diferenciada:
 
-```
+```text
 src/
 ├── core/         # Capa de dominio: Store reactivo, historial (Undo/Redo), persistencia y datos iniciales
 ├── services/     # Lógica de aplicación: Drag & drop nativo, accesibilidad por teclado, filtros y notificaciones
@@ -16,7 +16,8 @@ src/
 └── styles/       # Sistema de diseño: Tokens, reset accesible, layouts y componentes
 ```
 
-### Beneficios obtenidos:
+### Beneficios obtenidos
+
 * **Mantenibilidad**: Si se requiere cambiar el motor de almacenamiento de `localStorage` a una API REST o IndexedDB, únicamente se modifica `src/core/storage.js` sin alterar las vistas ni los componentes.
 * **Testabilidad**: Los servicios como `filterService` o `history.js` son funciones puras o clases sin dependencias del DOM, lo que permite pruebas unitarias inmediatas.
 
@@ -45,9 +46,11 @@ Implementar una función fiable de **Deshacer (Undo)** y **Rehacer (Redo)** en u
 ## 4. Accesibilidad (a11y) y Movimiento de Tarjetas por Teclado
 
 ### El desafío de la industria
+
 El 95% de los tableros Kanban en portafolios web dependen exclusivamente de eventos de puntero (ratón o pantalla táctil), excluyendo por completo a usuarios con discapacidades motrices o aquellos que navegan mediante tecnología asistiva.
 
-### La solución implementada:
+### La solución implementada
+
 1. **Modo de captura accesible (*Grab Mode*)**:
    * Las tarjetas son elementos interactivos con `tabindex="0"`, `role="button"` y `aria-roledescription="Tarjeta Kanban"`.
    * Al pulsar `Espacio` o `Enter`, la tarjeta entra en estado capturado (`aria-grabbed="true"`).
@@ -66,6 +69,7 @@ El 95% de los tableros Kanban en portafolios web dependen exclusivamente de even
 ## 5. Búsqueda y Filtrado Multicriterio en Tiempo Real
 
 El filtrado en tableros Kanban presenta el reto de mantener la coherencia de las columnas sin romper los índices reales de las tareas:
+
 * El servicio `filterService` genera una proyección filtrada del tablero sin mutar el estado original en el almacén.
 * Soporta filtrado simultáneo por:
   * **Texto libre** (coincidencia en título y descripción).
@@ -80,15 +84,18 @@ El filtrado en tableros Kanban presenta el reto de mantener la coherencia de las
 
 Durante el pulido de la interfaz y la experiencia de usuario surgieron desafíos específicos de maquetación avanzada:
 
-### El dilema del botón de subida de archivos vs. `<label>`:
+### El dilema del botón de subida de archivos frente a botones semánticos
+
 * **El problema:** Al integrar un botón para importar respaldos JSON en la barra de herramientas, se utilizó inicialmente una etiqueta `<label>` conteniendo un `<input type="file" style="display:none">`. Los navegadores aplican por defecto a los elementos `<label>` una alineación de línea base (`baseline`) de texto, a diferencia de los elementos `<button>` estilizados con `display: inline-flex; align-items: center;`. Esta discrepancia provocaba que el icono SVG de subida flotara varios píxeles más arriba que los botones vecinos de exportación, atajos y tema.
 * **La solución arquitectónica:** Se sustituyó el `<label>` por un `<button type="button">` semántico idéntico a sus pares y se desacopló el `<input type="file">` invisible. Un controlador de eventos dispara `.click()` sobre el input programáticamente. Además, se forzó en CSS una altura estricta unificada (38px), centrado flex y `margin: auto; display: block;` en todos los SVGs de la barra.
 
-### Acciones críticas y diseño responsive de tableros anchos:
+### Acciones críticas y diseño responsive de tableros anchos
+
 * **El problema:** En resoluciones medias o ventanas no maximizadas, la columna especial `+ Añadir Columna` ubicada al extremo derecho del contenedor horizontal quedaba fuera del campo visual inmediato, obligando al usuario a desplazarse lateralmente para percatarse de su existencia.
 * **La solución:** Se diseñó un patrón de acceso dual: un botón de acción rápida `+ Añadir Columna` destacado en la cabecera del tablero junto al contador de columnas y tarjetas, sincronizado visualmente con el botón del final del carril.
 
-### Despliegue estático con Vite en GitHub Pages:
+### Despliegue estático con Vite en GitHub Pages
+
 * **El desafío:** El enrutamiento de activos relativos en GitHub Pages requiere una sub-ruta fija (`/Kanban_Tableu/`). Se configuró la opción `base` en `vite.config.js` y se automatizó la compilación mediante GitHub Actions para garantizar compilaciones reproducibles en cada commit.
 
 ---
@@ -96,8 +103,8 @@ Durante el pulido de la interfaz y la experiencia de usuario surgieron desafíos
 ## 7. Conclusión y Valor para el Portafolio Profesional
 
 Este proyecto demuestra que no es necesario recurrir a grandes marcos de trabajo para construir aplicaciones web complejas, rápidas y accesibles. Demuestra:
+
 * Dominio exhaustivo de estándares web modernos (HTML5 Drag & Drop, Dialog API, CSS Custom Properties).
 * Compromiso real con la accesibilidad universal (WCAG 2.1 AA) tanto por teclado como para lectores de pantalla.
 * Arquitectura de software modular, limpia y escalable.
 * Atención minuciosa a la estética, micro-interacciones, consistencia pixel-perfect y experiencia de usuario profesional.
-
