@@ -125,11 +125,14 @@ The application is deployed live to GitHub Pages using two automated avenues:
 
 ---
 
-## Documentation
+## Documentation Suite
 
-Detailed architectural notes and learnings are available in the `docs/` folder:
-* **[docs/tecnologias.md](docs/tecnologias.md)**: Deep dive into the chosen technologies, native browser APIs, responsive design tokens, and rationale.
-* **[docs/aprendizajes.md](docs/aprendizajes.md)**: Lessons learned in managing complex client-side state, Command patterns for history, cross-browser toolbar alignments, and building accessible keyboard-driven interfaces.
+Detailed architectural notes, design decisions, and guides are available in the `docs/` folder:
+* **[docs/tecnologias.md](docs/tecnologias.md)**: Deep dive into the chosen technologies, native browser APIs, responsive design tokens, and architectural rationale.
+* **[docs/arquitectura.md](docs/arquitectura.md)**: Layered software architecture (`core`, `services`, `ui`), unidirectional data flow, reactive `EventTarget` store, and Command pattern.
+* **[docs/accesibilidad.md](docs/accesibilidad.md)**: Comprehensive WCAG 2.1 AA accessibility guide, virtual grab keyboard navigation, ARIA live narrator, and high-contrast color ratios.
+* **[docs/aprendizajes.md](docs/aprendizajes.md)**: Lessons learned in managing complex state, solving cross-browser `<label>` vs `<button>` alignment nuances, and action discovery patterns.
+* **[docs/guia_desarrollo.md](docs/guia_desarrollo.md)**: Developer setup, extension recipes (custom tags/priorities), manual QA checklist, and CI/CD pipelines.
 
 ---
 
