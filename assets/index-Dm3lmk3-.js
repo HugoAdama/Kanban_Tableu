@@ -265,22 +265,21 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
             </button>
           </div>
 
-          <button type="button" class="btn btn-ghost btn-icon-only" id="btn-shortcuts" title="Atajos de teclado y accesibilidad (?)" aria-label="Ver atajos de teclado">
-            ${K(`Keyboard`,{size:17})}
-          </button>
-
-          <button type="button" class="btn btn-ghost btn-icon-only" id="btn-export" title="Exportar tableros a JSON" aria-label="Exportar tableros">
-            ${K(`Download`,{size:16})}
-          </button>
-
-          <label class="btn btn-ghost btn-icon-only" title="Importar tableros desde JSON" aria-label="Importar tableros" style="cursor: pointer; margin: 0;">
-            ${K(`Upload`,{size:16})}
-            <input type="file" id="file-import" accept=".json" style="display: none;" />
-          </label>
-
-          <button type="button" class="btn btn-ghost btn-icon-only" id="btn-toggle-theme" title="Cambiar tema claro/oscuro" aria-label="Cambiar tema claro u oscuro">
-            ${K(a===`dark`?`Sun`:`Moon`,{size:17})}
-          </button>
+          <div class="toolbar-group" role="group" aria-label="Herramientas y ajustes">
+            <button type="button" class="btn btn-ghost btn-icon-only" id="btn-shortcuts" title="Atajos de teclado y accesibilidad (?)" aria-label="Ver atajos de teclado">
+              ${K(`Keyboard`,{size:16})}
+            </button>
+            <button type="button" class="btn btn-ghost btn-icon-only" id="btn-export" title="Exportar copia de seguridad (JSON)" aria-label="Exportar copia de seguridad">
+              ${K(`Download`,{size:16})}
+            </button>
+            <label class="btn btn-ghost btn-icon-only" title="Importar copia de seguridad (JSON)" aria-label="Importar copia de seguridad" style="cursor: pointer; margin: 0;">
+              ${K(`Upload`,{size:16})}
+              <input type="file" id="file-import" accept=".json" style="display: none;" />
+            </label>
+            <button type="button" class="btn btn-ghost btn-icon-only" id="btn-toggle-theme" title="${a===`dark`?`Cambiar a modo claro`:`Cambiar a modo oscuro`}" aria-label="Cambiar tema claro u oscuro">
+              ${K(a===`dark`?`Sun`:`Moon`,{size:16})}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -395,6 +394,10 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
             ${K(`CheckCircle2`,{size:14})}
             ${r}
           </span>
+          <button type="button" class="btn btn-primary btn-add-col-top" id="btn-add-column-top" title="Añadir una nueva columna a este tablero">
+            ${K(`Plus`,{size:15})}
+            <span>Añadir Columna</span>
+          </button>
         </div>
       </section>
 
@@ -491,7 +494,7 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
           ${a}
         </footer>
       </article>
-    `}_attachEventListeners(){let e=this.container.querySelector(`#btn-add-column-card`);e&&(e.addEventListener(`click`,()=>Y.openColumnModal()),e.addEventListener(`keydown`,e=>{(e.key===`Enter`||e.key===` `)&&(e.preventDefault(),Y.openColumnModal())})),this.container.querySelectorAll(`.btn-col-edit`).forEach(e=>{e.addEventListener(`click`,t=>{t.stopPropagation();let n=e.dataset.colId,r=d.getActiveBoard()?.columns.find(e=>e.id===n);r&&Y.openColumnModal({column:r})})}),this.container.querySelectorAll(`.btn-col-delete`).forEach(e=>{e.addEventListener(`click`,t=>{t.stopPropagation();let n=e.dataset.colId,r=d.getActiveBoard(),i=r?.columns.find(e=>e.id===n);if(!i)return;let a=i.cards.length,o=a>0?` Esta columna contiene ${a} tarjetas que también serán eliminadas.`:``;Y.openConfirmModal({title:`¿Eliminar columna "${i.name}"?`,message:`¿Estás seguro de que deseas eliminar esta columna?${o} Esta acción puede ser deshecha con el botón Deshacer.`,confirmText:`Eliminar Columna`,isDanger:!0,onConfirm:()=>{d.deleteColumn(r.id,i.id)}})})}),this.container.querySelectorAll(`.btn-col-add-card, .btn-add-card`).forEach(e=>{e.addEventListener(`click`,t=>{t.stopPropagation();let n=e.dataset.colId;Y.openCardModal({defaultColumnId:n})})}),this.container.querySelectorAll(`.btn-card-edit`).forEach(e=>{e.addEventListener(`click`,t=>{t.stopPropagation();let n=e.dataset.cardId,r=d.getActiveBoard(),i=null;for(let e of r.columns){let t=e.cards.find(e=>e.id===n);if(t){i=t;break}}i&&Y.openCardModal({card:i})})}),this.container.querySelectorAll(`.btn-card-delete`).forEach(e=>{e.addEventListener(`click`,t=>{t.stopPropagation();let n=e.dataset.cardId,r=d.getActiveBoard(),i=null;for(let e of r.columns){let t=e.cards.find(e=>e.id===n);if(t){i=t;break}}i&&Y.openConfirmModal({title:`¿Eliminar tarjeta?`,message:`¿Estás seguro de eliminar "${i.title}"? Podrás deshacer esta acción si lo deseas.`,confirmText:`Eliminar`,isDanger:!0,onConfirm:()=>{d.deleteCard(r.id,i.id)}})})})}};function $(e){return e?e.replace(/&/g,`&amp;`).replace(/</g,`&lt;`).replace(/>/g,`&gt;`).replace(/"/g,`&quot;`):``}function aP(e){return e?e.charAt(0).toUpperCase()+e.slice(1):``}var oP=class{constructor(e){this.root=e,this.headerView=null,this.boardView=null}init(){this.root.className=`app-container`,this.root.innerHTML=`
+    `}_attachEventListeners(){let e=this.container.querySelector(`#btn-add-column-card`);e&&(e.addEventListener(`click`,()=>Y.openColumnModal()),e.addEventListener(`keydown`,e=>{(e.key===`Enter`||e.key===` `)&&(e.preventDefault(),Y.openColumnModal())}));let t=this.container.querySelector(`#btn-add-column-top`);t&&t.addEventListener(`click`,()=>Y.openColumnModal()),this.container.querySelectorAll(`.btn-col-edit`).forEach(e=>{e.addEventListener(`click`,t=>{t.stopPropagation();let n=e.dataset.colId,r=d.getActiveBoard()?.columns.find(e=>e.id===n);r&&Y.openColumnModal({column:r})})}),this.container.querySelectorAll(`.btn-col-delete`).forEach(e=>{e.addEventListener(`click`,t=>{t.stopPropagation();let n=e.dataset.colId,r=d.getActiveBoard(),i=r?.columns.find(e=>e.id===n);if(!i)return;let a=i.cards.length,o=a>0?` Esta columna contiene ${a} tarjetas que también serán eliminadas.`:``;Y.openConfirmModal({title:`¿Eliminar columna "${i.name}"?`,message:`¿Estás seguro de que deseas eliminar esta columna?${o} Esta acción puede ser deshecha con el botón Deshacer.`,confirmText:`Eliminar Columna`,isDanger:!0,onConfirm:()=>{d.deleteColumn(r.id,i.id)}})})}),this.container.querySelectorAll(`.btn-col-add-card, .btn-add-card`).forEach(e=>{e.addEventListener(`click`,t=>{t.stopPropagation();let n=e.dataset.colId;Y.openCardModal({defaultColumnId:n})})}),this.container.querySelectorAll(`.btn-card-edit`).forEach(e=>{e.addEventListener(`click`,t=>{t.stopPropagation();let n=e.dataset.cardId,r=d.getActiveBoard(),i=null;for(let e of r.columns){let t=e.cards.find(e=>e.id===n);if(t){i=t;break}}i&&Y.openCardModal({card:i})})}),this.container.querySelectorAll(`.btn-card-delete`).forEach(e=>{e.addEventListener(`click`,t=>{t.stopPropagation();let n=e.dataset.cardId,r=d.getActiveBoard(),i=null;for(let e of r.columns){let t=e.cards.find(e=>e.id===n);if(t){i=t;break}}i&&Y.openConfirmModal({title:`¿Eliminar tarjeta?`,message:`¿Estás seguro de eliminar "${i.title}"? Podrás deshacer esta acción si lo deseas.`,confirmText:`Eliminar`,isDanger:!0,onConfirm:()=>{d.deleteCard(r.id,i.id)}})})})}};function $(e){return e?e.replace(/&/g,`&amp;`).replace(/</g,`&lt;`).replace(/>/g,`&gt;`).replace(/"/g,`&quot;`):``}function aP(e){return e?e.charAt(0).toUpperCase()+e.slice(1):``}var oP=class{constructor(e){this.root=e,this.headerView=null,this.boardView=null}init(){this.root.className=`app-container`,this.root.innerHTML=`
       <header class="app-header" id="app-header" role="banner"></header>
       <main class="board-main" id="board-main" role="main"></main>
     `;let e=this.root.querySelector(`#app-header`),t=this.root.querySelector(`#board-main`);this.headerView=new tP(e),this.boardView=new iP(t),this.headerView.render(),this.boardView.render(),this._bindGlobalShortcuts(),this._bindStoreNotifications()}_bindGlobalShortcuts(){window.addEventListener(`keydown`,e=>{let t=document.activeElement;if(t&&[`INPUT`,`TEXTAREA`,`SELECT`].includes(t.tagName))return;let n=navigator.platform.toUpperCase().indexOf(`MAC`)>=0?e.metaKey:e.ctrlKey;if(n&&!e.shiftKey&&e.key.toLowerCase()===`z`){e.preventDefault();let t=d.undo();t&&q.show(`Deshecho: ${t.description}`,{type:`info`});return}if(n&&e.key.toLowerCase()===`y`||n&&e.shiftKey&&e.key.toLowerCase()===`z`){e.preventDefault();let t=d.redo();t&&q.show(`Rehecho: ${t.description}`,{type:`info`});return}if(e.key===`?`||e.shiftKey&&e.key===`/`){e.preventDefault(),Y.openShortcutsModal();return}})}_bindStoreNotifications(){d.addEventListener(i.STATE_CHANGED,e=>{e.detail?.message&&e.detail.cardId})}};function sP(){let e=document.querySelector(`#app`);e&&new oP(e).init()}document.readyState===`loading`?document.addEventListener(`DOMContentLoaded`,sP):sP();
