@@ -143,8 +143,8 @@
 .card-actions-menu {
   display: flex;
   align-items: center;
-  gap: 0.15rem;
-  opacity: 0.2;
+  gap: 0.25rem;
+  opacity: 0.6;
   transition: opacity var(--transition-fast);
 }
 
@@ -159,16 +159,22 @@
   padding: 0;
   border-radius: var(--radius-sm);
   color: var(--text-muted);
+  background-color: var(--bg-surface-hover);
+  border: 1px solid var(--border-subtle);
+  transition: all var(--transition-fast);
 }
 
 .card-action-btn:hover {
   background-color: var(--bg-surface-active);
   color: var(--text-primary);
+  border-color: var(--border-strong);
+  transform: scale(1.05);
 }
 
 .card-action-btn.delete-btn:hover {
   color: var(--color-danger);
   background-color: var(--color-danger-bg);
+  border-color: var(--color-danger-border);
 }
 
 /* Card Description */
