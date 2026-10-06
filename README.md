@@ -2,6 +2,10 @@
 
 > A high-performance, accessible, and modular Kanban board built with modern Vanilla JavaScript, CSS Design Tokens, and native web APIs. Designed with zero runtime framework dependencies, full WCAG 2.1 AA keyboard accessibility, native Drag and Drop, multi-board management, multi-criteria filtering, and an Undo/Redo history stack.
 
+[![Live Demo](https://img.shields.io/badge/demo-live%20preview-6366f1?style=for-the-badge)](https://hugoadama.github.io/Kanban_Tableu/)
+
+🔗 **Live Demo**: [https://hugoadama.github.io/Kanban_Tableu/](https://hugoadama.github.io/Kanban_Tableu/)
+
 ---
 
 ## Highlights & Portfolio Value
