@@ -43,10 +43,14 @@
 KANBAN_TABLEU/
 ├── docs/
 │   ├── tecnologias.md          # Technical stack, browser APIs & justification
-│   └── aprendizajes.md         # Architecture decisions, state complexity & a11y
+│   ├── arquitectura.md         # Layered design, data flow, reactive store & Command stack
+│   ├── accesibilidad.md        # WCAG 2.1 AA keyboard accessibility & ARIA narrator
+│   ├── aprendizajes.md         # Architecture decisions, state complexity & a11y
+│   └── guia_desarrollo.md      # Setup, contributor guide, extension recipes & QA checklist
 ├── src/
 │   ├── core/
 │   │   ├── types.js            # Priorities, default tags, and event definitions
+│   │   ├── utils.js            # HTML sanitization, string capitalization & helpers
 │   │   ├── seedData.js         # Realistic initial data for portfolio showcases
 │   │   ├── storage.js          # LocalStorage persistence & JSON export/import
 │   │   ├── history.js          # Command/Snapshot stack for Undo & Redo
@@ -58,14 +62,17 @@ KANBAN_TABLEU/
 │   │   └── notificationService.js # Toasts with integrated undo trigger
 │   ├── ui/
 │   │   ├── icons.js            # Clean Lucide SVG icon renderer
-│   │   ├── dialogs.js          # Accessible native <dialog> modals
+│   │   ├── cardComponent.js    # Encapsulated card markup, badges & due dates
+│   │   ├── modalTemplates.js   # Isolated HTML templates for dialog forms
+│   │   ├── dialogs.js          # Accessible native <dialog> manager & focus trapping
 │   │   ├── headerView.js       # App header, board switcher, search & filters
-│   │   ├── boardView.js        # Column swimlanes, card components & dropzones
+│   │   ├── boardView.js        # Column swimlanes, drag dropzones & board orchestrator
 │   │   └── a11yAnnouncer.js    # ARIA live region narrator for screen readers
 │   ├── styles/
 │   │   ├── variables.css       # Design tokens, HSL colors & theme definitions
 │   │   ├── reset.css           # Accessible reset & custom scrollbars
-│   │   ├── layout.css          # App layout, header & controls
+│   │   ├── layout.css          # App layout shell, header & action toolbars
+│   │   ├── filters.css         # Search bar, dropdowns, chips & active tag pills
 │   │   ├── board.css           # Kanban columns & horizontal track
 │   │   ├── card.css            # Cards, badges, tags & drag/grab states
 │   │   ├── dialog.css          # Native <dialog> modals & form styling

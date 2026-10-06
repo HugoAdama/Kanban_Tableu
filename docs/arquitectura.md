@@ -11,7 +11,8 @@ El proyecto implementa una **arquitectura por capas desacoplada** con estricta s
 ```text
 ┌─────────────────────────────────────────────────────────────┐
 │                 Capa de Presentación (UI)                   │
-│   headerView.js  │  boardView.js  │  dialogs.js  │  icons.js│
+│   headerView.js    │   boardView.js    │   cardComponent.js │
+│   dialogs.js       │ modalTemplates.js │   icons.js         │
 └──────────────────────────────┬──────────────────────────────┘
                                │ Eventos de usuario / Invocación
                                ▼
@@ -25,7 +26,7 @@ El proyecto implementa una **arquitectura por capas desacoplada** con estricta s
 ┌─────────────────────────────────────────────────────────────┐
 │                   Capa de Dominio (Core)                    │
 │   store.js (EventTarget) │   history.js (Command Pattern)   │
-│   storage.js (Sync/JSON) │   types.js & seedData.js         │
+│   storage.js (Sync/JSON) │   types.js, utils.js & seedData  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -48,6 +49,7 @@ Representa el corazón del sistema, independiente de la representación visual:
   * Sincronización transparente con `window.localStorage`.
   * Generación y descarga de archivos de respaldo en formato `.json`.
   * Validación estructural y carga segura de copias de seguridad importadas.
+* **`utils.js`**: Utilidades puras compartidas para sanitización HTML (`escapeHtml`), capitalización y formateo seguro de datos.
 * **`types.js`**: Definición canónica de prioridades (`baja`, `media`, `alta`, `urgente`), etiquetas predeterminadas y nombres de eventos.
 * **`seedData.js`**: Datos de prueba completos y realistas (Sprint de desarrollo web) que se cargan automáticamente si no existe estado previo en el navegador.
 
@@ -82,12 +84,12 @@ Responsable de renderizar la interfaz de usuario a partir del estado:
   * Buscador en tiempo real, selector de filtros y barra de chips de filtrado rápido a 1-clic.
 * **`boardView.js`**: Renderiza el lienzo principal del tablero Kanban.
   * Cabecera con título, descripción y métricas en vivo (contador de columnas, contador de tarjetas y acceso rápido a `+ Añadir Columna`).
-  * Carril horizontal con soporte de desplazamiento suave conteniendo las columnas y sus respectivas tarjetas.
-  * Tarjetas con diseño elevado, borde de prioridad, etiquetas temáticas, fechas relativas y botones de acción.
+  * Carril horizontal con soporte de desplazamiento suave conteniendo las columnas y la orquestación de dropzones.
+* **`cardComponent.js`**: Componente modular aislado de tarjeta Kanban.
+  * Encapsula la plantilla DOM de la tarjeta, modo mover accesible, insignias de prioridad, etiquetas dinámicas y cálculo de fechas límites.
+* **`modalTemplates.js`**: Generador puro de plantillas HTML para diálogos modales (Tarjetas, Tableros, Columnas, Confirmaciones destructivas y Atajos).
 * **`dialogs.js`**: Gestor de diálogos nativos utilizando la API `<dialog>`.
-  * Modal accesible de creación/edición de tarjeta con validación de campos obligatorios.
-  * Modal de gestión de tablero y modal de confirmación destructiva.
-  * Modal interactivo de atajos de teclado y ayuda de navegación.
+  * Coordina el ciclo de vida del modal, aislamiento `inert`, trampa de foco accesible y despacho de eventos de formulario hacia el store.
 * **`icons.js`**: Generador de iconos SVG vectoriales sin dependencias pesadas de runtime, basado en las definiciones de Lucide.
 * **`a11yAnnouncer.js`**: Región viva accesible (`aria-live="polite"`) que narra eventos para lectores de pantalla en segundo plano sin interrumpir al usuario.
 

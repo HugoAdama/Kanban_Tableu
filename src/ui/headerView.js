@@ -5,6 +5,7 @@ import { dialogs } from './dialogs.js';
 import { filterService } from '../services/filterService.js';
 import { PRIORITIES, DEFAULT_TAGS, EVENTS } from '../core/types.js';
 import { notifications } from '../services/notificationService.js';
+import { escapeHtml } from '../core/utils.js';
 
 export class HeaderView {
   constructor(headerElement) {
@@ -376,9 +377,4 @@ export class HeaderView {
     if (undoBtn) undoBtn.disabled = !store.history.canUndo();
     if (redoBtn) redoBtn.disabled = !store.history.canRedo();
   }
-}
-
-function escapeHtml(str) {
-  if (!str) return '';
-  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
