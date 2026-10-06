@@ -92,7 +92,7 @@ export class BoardView {
       `;
 
     return `
-      <section class="kanban-column" data-column-id="${column.id}" aria-labelledby="col-title-${column.id}">
+      <section class="kanban-column" data-column-id="${column.id}" style="--column-color: ${column.color || '#6366f1'};" aria-labelledby="col-title-${column.id}">
         <header class="column-header">
           <div class="column-header-title-wrap">
             <span class="column-color-indicator" style="background-color: ${column.color || '#6366f1'};"></span>
@@ -160,6 +160,7 @@ export class BoardView {
       <article
         class="kanban-card"
         data-card-id="${card.id}"
+        data-priority="${card.priority?.toLowerCase() || 'media'}"
         draggable="true"
         tabindex="0"
         role="button"

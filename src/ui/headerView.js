@@ -157,6 +157,27 @@ export class HeaderView {
               ${dueDateOptions}
             </select>
           </div>
+
+          <div class="quick-filter-chips" role="group" aria-label="Filtros rápidos">
+            <button type="button" class="quick-chip ${filters.priority === 'all' && filters.tag === 'all' && filters.dueDate === 'all' && !filters.search ? 'active' : ''}" data-filter-type="reset">
+              Todos
+            </button>
+            <button type="button" class="quick-chip ${filters.priority === 'urgente' ? 'active' : ''}" data-filter-type="priority" data-filter-val="urgente">
+              ${renderIconSvg('AlertTriangle', { size: 12 })} Urgente
+            </button>
+            <button type="button" class="quick-chip ${filters.priority === 'alta' ? 'active' : ''}" data-filter-type="priority" data-filter-val="alta">
+              ${renderIconSvg('ArrowUp', { size: 12 })} Alta
+            </button>
+            <button type="button" class="quick-chip ${filters.dueDate === 'soon' ? 'active' : ''}" data-filter-type="dueDate" data-filter-val="soon">
+              ${renderIconSvg('Clock', { size: 12 })} Próximas
+            </button>
+            <button type="button" class="quick-chip ${filters.dueDate === 'overdue' ? 'active' : ''}" data-filter-type="dueDate" data-filter-val="overdue">
+              ${renderIconSvg('Calendar', { size: 12 })} Vencidas
+            </button>
+            <button type="button" class="quick-chip ${filters.tag === 'bug' ? 'active' : ''}" data-filter-type="tag" data-filter-val="bug">
+              ${renderIconSvg('Tag', { size: 12 })} Bugs
+            </button>
+          </div>
         </div>
 
         ${hasActiveFilters ? `
@@ -321,6 +342,26 @@ export class HeaderView {
         store.resetFilters();
       });
     }
+
+    // Quick filter chips clicks
+    this.element.querySelectorAll('.quick-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const type = chip.dataset.filterType;
+        const val = chip.dataset.filterVal;
+        if (type === 'reset') {
+          store.resetFilters();
+        } else if (type === 'priority') {
+          const current = store.getFilters().priority;
+          store.setFilters({ priority: current === val ? 'all' : val });
+        } else if (type === 'dueDate') {
+          const current = store.getFilters().dueDate;
+          store.setFilters({ dueDate: current === val ? 'all' : val });
+        } else if (type === 'tag') {
+          const current = store.getFilters().tag;
+          store.setFilters({ tag: current === val ? 'all' : val });
+        }
+      });
+    });
   }
 
   updateHistoryButtons() {
