@@ -1,0 +1,276 @@
+/* Kanban Card Styles & States */
+.kanban-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  cursor: grab;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), opacity var(--transition-fast);
+  user-select: none;
+}
+
+.kanban-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.kanban-card:active {
+  cursor: grabbing;
+}
+
+/* Accessible focus styling */
+.kanban-card:focus-visible {
+  outline: 2px solid var(--accent-focus);
+  outline-offset: 2px;
+  box-shadow: var(--shadow-md);
+}
+
+/* Dragging state */
+.kanban-card.is-dragging {
+  opacity: 0.45;
+  transform: scale(0.98);
+  border: 1px dashed var(--accent-primary);
+}
+
+/* Keyboard Grabbed State - Highlighted for a11y */
+.kanban-card.is-keyboard-grabbed {
+  outline: 3px solid var(--accent-focus) !important;
+  outline-offset: 3px;
+  background-color: var(--bg-surface-hover);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 20px rgba(var(--accent-primary-rgb), 0.45), var(--shadow-xl);
+  transform: scale(1.02);
+  z-index: 10;
+  animation: pulse-keyboard-border 2s infinite ease-in-out;
+}
+
+@keyframes pulse-keyboard-border {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(var(--accent-primary-rgb), 0.35);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(var(--accent-primary-rgb), 0.65);
+  }
+}
+
+/* Keyboard active badge on card */
+.keyboard-active-badge {
+  display: none;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--accent-primary);
+  color: white;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.is-keyboard-grabbed .keyboard-active-badge {
+  display: flex;
+}
+
+/* Drop indicator insertion lines */
+.drop-indicator-top {
+  border-top: 3px solid var(--accent-primary) !important;
+  margin-top: 2px;
+}
+
+.drop-indicator-bottom {
+  border-bottom: 3px solid var(--accent-primary) !important;
+  margin-bottom: 2px;
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.card-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.card-actions-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  opacity: 0.7;
+  transition: opacity var(--transition-fast);
+}
+
+.kanban-card:hover .card-actions-menu,
+.kanban-card:focus-within .card-actions-menu {
+  opacity: 1;
+}
+
+.card-action-btn {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+}
+
+.card-action-btn:hover {
+  background-color: var(--bg-surface-active);
+  color: var(--text-primary);
+}
+
+.card-action-btn.delete-btn:hover {
+  color: var(--color-danger);
+  background-color: var(--color-danger-bg);
+}
+
+/* Card Description */
+.card-desc {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+/* Card Tags */
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tag-badge {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  line-height: 1;
+}
+
+/* Specific Tag Colors */
+.tag-badge.frontend {
+  background-color: var(--tag-frontend-bg);
+  color: var(--tag-frontend);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.tag-badge.backend {
+  background-color: var(--tag-backend-bg);
+  color: var(--tag-backend);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.tag-badge.bug {
+  background-color: var(--tag-bug-bg);
+  color: var(--tag-bug);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+}
+
+.tag-badge.design {
+  background-color: var(--tag-design-bg);
+  color: var(--tag-design);
+  border: 1px solid rgba(236, 72, 153, 0.3);
+}
+
+.tag-badge.feature {
+  background-color: var(--tag-feature-bg);
+  color: var(--tag-feature);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.tag-badge.devops {
+  background-color: var(--tag-devops-bg);
+  color: var(--tag-devops);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.tag-badge.docs {
+  background-color: var(--tag-docs-bg);
+  color: var(--tag-docs);
+  border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+.tag-badge.custom {
+  background-color: var(--bg-surface-active);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+}
+
+/* Card Footer: Metadata (Priority, Due Date) */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.75rem;
+}
+
+.priority-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 600;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-sm);
+}
+
+.priority-badge.baja {
+  color: var(--color-info);
+  background-color: var(--color-info-bg);
+}
+
+.priority-badge.media {
+  color: var(--color-warning);
+  background-color: var(--color-warning-bg);
+}
+
+.priority-badge.alta {
+  color: #fb923c;
+  background-color: rgba(251, 146, 60, 0.15);
+}
+
+.priority-badge.urgente {
+  color: var(--color-danger);
+  background-color: var(--color-danger-bg);
+}
+
+/* Due Date Badge */
+.due-date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-muted);
+}
+
+.due-date-badge.is-overdue {
+  color: var(--color-danger);
+  font-weight: 600;
+}
+
+.due-date-badge.is-soon {
+  color: var(--color-warning);
+  font-weight: 600;
+}

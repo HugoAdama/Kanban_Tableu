@@ -1,0 +1,68 @@
+/* Accessibility & Keyboard Drag Mode UI */
+.keyboard-move-helper-bar {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  z-index: var(--z-help-bar);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--accent-focus);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 16px rgba(var(--accent-primary-rgb), 0.35);
+  border-radius: var(--radius-full);
+  padding: 0.625rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  transition: transform var(--transition-bounce), opacity var(--transition-normal);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.keyboard-move-helper-bar.active {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.helper-text {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.helper-instructions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.helper-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.btn-cancel-keyboard-move {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  border-radius: var(--radius-full);
+  background-color: rgba(239, 68, 68, 0.15);
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger-border);
+}
+
+.btn-cancel-keyboard-move:hover {
+  background-color: rgba(239, 68, 68, 0.25);
+}
+
+/* High Contrast & Focus visibility */
+@media (forced-colors: active) {
+  .kanban-card.is-keyboard-grabbed {
+    outline: 3px solid Highlight !important;
+  }
+}
