@@ -171,8 +171,22 @@
 .column-header-actions .btn-icon-only {
   width: 28px;
   height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   border-radius: var(--radius-sm);
   color: var(--text-muted);
+  box-sizing: border-box;
+}
+
+.column-header-actions .btn-icon-only svg {
+  display: block;
+  margin: auto;
+  flex-shrink: 0;
 }
 
 .column-header-actions .btn-icon-only:hover {

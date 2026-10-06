@@ -156,12 +156,25 @@
 .card-action-btn {
   width: 28px;
   height: 28px;
+  min-width: 28px;
+  min-height: 28px;
   padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   border-radius: var(--radius-sm);
   color: var(--text-muted);
   background-color: var(--bg-surface-hover);
   border: 1px solid var(--border-subtle);
   transition: all var(--transition-fast);
+  box-sizing: border-box;
+}
+
+.card-action-btn svg {
+  display: block;
+  margin: auto;
+  flex-shrink: 0;
 }
 
 .card-action-btn:hover {

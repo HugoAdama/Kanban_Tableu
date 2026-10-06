@@ -110,10 +110,10 @@ export class HeaderView {
             <button type="button" class="btn btn-ghost btn-icon-only" id="btn-export" title="Exportar copia de seguridad (JSON)" aria-label="Exportar copia de seguridad">
               ${renderIconSvg('Download', { size: 16 })}
             </button>
-            <label class="btn btn-ghost btn-icon-only" title="Importar copia de seguridad (JSON)" aria-label="Importar copia de seguridad" style="cursor: pointer; margin: 0;">
+            <button type="button" class="btn btn-ghost btn-icon-only" id="btn-import-trigger" title="Importar copia de seguridad (JSON)" aria-label="Importar copia de seguridad">
               ${renderIconSvg('Upload', { size: 16 })}
-              <input type="file" id="file-import" accept=".json" style="display: none;" />
-            </label>
+            </button>
+            <input type="file" id="file-import" accept=".json" style="display: none;" />
             <button type="button" class="btn btn-ghost btn-icon-only" id="btn-toggle-theme" title="${theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}" aria-label="Cambiar tema claro u oscuro">
               ${renderIconSvg(theme === 'dark' ? 'Sun' : 'Moon', { size: 16 })}
             </button>
@@ -279,7 +279,14 @@ export class HeaderView {
     }
 
     // Import JSON
+    const importTriggerBtn = this.element.querySelector('#btn-import-trigger');
     const importInput = this.element.querySelector('#file-import');
+    if (importTriggerBtn && importInput) {
+      importTriggerBtn.addEventListener('click', () => {
+        importInput.click();
+      });
+    }
+
     if (importInput) {
       importInput.addEventListener('change', async (e) => {
         const file = e.target.files[0];
